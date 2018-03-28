@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project6.web.mapperImpl.BoardMapperImpl">  
+<insert id="insertBoard" parameterType="board"> 
+INSERT INTO board
+VALUES(bbsSeq.nextval, #{title}, #{content}, sysdate, '2', '2', #{userid})
+</insert>
+<update id="updateBoard" parameterType="board">
+
+</update>
+<delete id="deleteBoard" parameterType="common">
+DELETE 
+FROM board
+WHERE BBS_SEQ like #{deleNum}
+</delete>
+<select id="selectOne" parameterType="board" resultType="board">
+
+</select>
+<select id="selectList" parameterType="board" resultType="board">
+
+</select>
+<select id="selectAll" parameterType="pagi" resultType="board">     
+select * 
+from (select rownum NO,
+             BBS_SEQ AS bbsSeq,
+             TITLE,
+             CONTENT,
+             WRITEDATE,
+             VIEW_COUNT AS viewCount,
+             GOOD,
+             USERID
+      from board)t
+where t.NO between ((#{pn}-1)*5)+1 and #{pn}*5       
+</select>
+<select id="count" resultType="int" parameterType="board">
+SELECT COUNT(*)
+FROM board
+</select>
+</mapper>
+

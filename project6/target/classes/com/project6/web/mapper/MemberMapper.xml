@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project6.web.mapperImpl.MemberMapperImpl">  <!-- 이 값은 바꿔줘야 합니다. -->
+
+<insert id="insertMember" parameterType="member"> 
+INSERT INTO member(userid,password,name,regdate)
+VALUES(#{userid},#{password},#{name},sysdate)
+</insert>
+<update id="updateMember" parameterType="member">
+UPDATE member
+SET password = #{afterPass} 
+WHERE password like #{beforePass}
+</update>
+<delete id="deleteMember" parameterType="member">
+DELETE 
+FROM member
+WHERE password like #{nowPass}
+</delete>
+<select id="selectOne" parameterType="member" resultType="member">
+SELECT userid,password,name,regdate
+FROM member
+WHERE userid like #{userid}
+</select>
+<select id="selectList" parameterType="member" resultType="member">
+
+</select>
+<select id="selectAll" resultType="member">
+
+</select>
+<select id="count" resultType="int" parameterType="member">
+SELECT COUNT(*)
+FROM member
+WHERE userid like #{userid} AND password like #{password}
+</select>
+</mapper>
