@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class PagiDTO {
 	private static final Logger logger = LoggerFactory.getLogger(PagiDTO.class);
-	private String pn;
 	int nowPage// 현재 위치한 페이지
 		,totalCount// 리스트 총 갯수
 		,blockSize// 화면에 출력할 리스트 갯수(한 페이지에 보이는 리스트 수)
@@ -15,7 +14,7 @@ public class PagiDTO {
 									   //this.startRow = (startRow<0)?1:startRow+1; 0보다작을수가없어서 0이아니냐0이냐를말하고있다고봐야합니다.페이지넘버가1이면0이되는데그때+1해주면된다는의미입니다.
 		,endRow// 화면의 리스트 끝    //endRow=pageNum*blockSize-1;
 									  //this.endRow = (endRow>=totalCount)?totalCount+1:endRow+1;
-		,pageNum// 이동할 페이지
+		,pN// 이동할 페이지
 		,startPage// 화면의 페이지 시작  //startPage=((pageNum-1)/pageSize)*pageSize+1;
 										 //this.startPage = startPage;
 		,endPage// 화면의 페이지 끝		//endPage=((pageNum-1)/pageSize)*pageSize+pageSize;  스타트페이지에서 1대신에 페이지사이즈를 더한겁니다.5일수도10일수도있어서요
@@ -24,12 +23,6 @@ public class PagiDTO {
 		,totalPageCount// 페이지 총 갯수 
 				//this.totalPageCount = ((totalCount%blockSize==0)?(totalCount/blockSize):((totalCount/blockSize)+1));
 		;
-	public String getPn() {
-		return pn;
-	}
-	public void setPn(String pn) {
-		this.pn = pn;
-	}
 	public int getNowPage() {
 		return nowPage;
 	}
@@ -52,36 +45,36 @@ public class PagiDTO {
 		return startRow;
 	}
 	public void setStartRow(int startRow) {
-		startRow = pageNum*blockSize-blockSize;
+		startRow = pN*blockSize-blockSize;
 		this.startRow = (startRow<0)?1:startRow+1;
 	}
 	public int getEndRow() {
 		return endRow;
 	}
 	public void setEndRow(int endRow) {
-		endRow=pageNum*blockSize-1;
+		endRow=pN*blockSize-1;
 		this.endRow = (endRow>=totalCount)?totalCount+1:endRow+1;
 	}
-	public int getPageNum() {
-		return pageNum;
+	public int getPN() {
+		return pN;
 	}
-	public void setPageNum(int pageNum) {
-		this.pageNum = pageNum;
-		//pageNum=((rowNum-1)/blockSize)+1;
+	public void setPN(int pN) {
+		this.pN = pN;
+		//pN=((rowNum-1)/blockSize)+1;
 		//blockNum=(rowNum-1)/(blckSize*pageSize);
 	}
 	public int getStartPage() {
 		return startPage;
 	}
 	public void setStartPage(int startPage) {
-		startPage=((pageNum-1)/pageSize)*pageSize+1;
+		startPage=((pN-1)/pageSize)*pageSize+1;
 		this.startPage = startPage;
 	}
 	public int getEndPage() {
 		return endPage;
 	}
 	public void setEndPage(int endPage) {
-		endPage=((pageNum-1)/pageSize)*pageSize+pageSize;
+		endPage=((pN-1)/pageSize)*pageSize+pageSize;
 		logger.info("PagiDTO에서 EndPage는 {}", endPage );
 		this.endPage = (endPage>=totalPageCount)?totalPageCount:endPage;
 	  //this.endPage = ((nowPage+pageSize-1)>=totalPageCount)?totalPageCount:nowPage+pageSize-1;

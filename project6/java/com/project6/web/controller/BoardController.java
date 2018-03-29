@@ -32,30 +32,30 @@ public class BoardController {
 	@Autowired Command cmd;
 	@Autowired PageProxy pagePxy;
 	
-	@RequestMapping(value="/list/{pn}",method=RequestMethod.GET)
+	@RequestMapping(value="/list/{pN}",method=RequestMethod.GET)
 	public String list(Model model,
-			@PathVariable("pn")String pn,
+			@PathVariable("pN")String pN,
 			@RequestParam(value="pageSize",defaultValue="5")String pageSize,
 			@RequestParam(value="blockSize",defaultValue="5")String blockSize,
-			@RequestParam(value="pageNum",defaultValue="1")String pageNum,
+			/*@RequestParam(value="pN",defaultValue="1")String pN,*/
 			@RequestParam(value="nowPage",defaultValue="1")String nowPage
 			) {
 		logger.info("보더 컨트롤러 list도착===========================");	
 		pagi.setPageSize(Integer.parseInt(pageSize));
 		pagi.setBlockSize(Integer.parseInt(blockSize));
-		pagi.setPageNum(Integer.parseInt(pageNum));
+		pagi.setPN(Integer.parseInt(pN));
 		pagi.setNowPage(Integer.parseInt(nowPage));
 		pagePxy.execute(model, pagi);
 		logger.info("보더 컨트롤러 list pagi는 {}", pagi);
 		logger.info("getPageSize는 {}",pagi.getPageSize());
 		logger.info("getBlockSize는 {}",pagi.getBlockSize());
-		logger.info("getPageNum는 {}",pagi.getPageNum());
+		logger.info("getPN는 {}",pagi.getPN());
 		logger.info("getNowPage는 {}",pagi.getNowPage());
-		pagi.setPn(pn);
-		logger.info("보더 컨트롤러 넘어온 페이지는{} ", pagi.getPn());
+		logger.info("!!!!보더 컨트롤러 pagi.getStartPage는{}",pagi.getStartPage());
+		logger.info("보더 컨트롤러 넘어온 페이지는{} ", pagi.getPN());
 		model.addAttribute("list", bService.findAll(pagi));
 		logger.info("bService.findAll(pagi)의 값은 {}", bService.findAll(pagi));
-	/*	model.addAttribute("totalCount", bService.count());*/
+		model.addAttribute("totalCount", bService.count());
 		logger.info("보더 컨트롤러 list에서 count의 값은 {}", bService.count()); //PageAdaptor에서정의요
 		logger.info("list에서 star의 값은 {}", pagi.getStartPage()); //PageAdaptor에서정의요
 		logger.info("list에서 end의 값은 {}", pagi.getEndPage()); //PageAdaptor에서정의요
@@ -96,7 +96,7 @@ public class BoardController {
 		bService.remove(common);
 		model.addAttribute("list", bService.findAll(pagi));
 		logger.info("bService.findAll(pagi)의 값은 {}", bService.findAll(pagi));
-		return "board/list";
+		return "redirect:/list/1";
 	}
 	
 	

@@ -61,7 +61,7 @@ public class BoardServiceImpl implements BoardService{
 		List<BoardDTO> t = mapper.selectAll(pagi);
 		logger.info("보드 서비스임플 findAll=============================");
 		logger.info(" t는 {}", t);
-		logger.info("보더 서비스임플 넘어온 페이지 pn은 {} ",	pagi.getPn());
+		logger.info("보더 서비스임플 넘어온 페이지 pN은 {} ",	pagi.getPN());
 		return t;
 	}
 

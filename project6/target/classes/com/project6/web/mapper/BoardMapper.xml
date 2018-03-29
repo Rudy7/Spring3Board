@@ -32,7 +32,8 @@ from (select rownum NO,
              GOOD,
              USERID
       from board)t
-where t.NO between ((#{pn}-1)*5)+1 and #{pn}*5       
+where t.NO between ((#{pN}-1)*5)+1 and #{pN}*5 
+order by bbsSeq asc      
 </select>
 <select id="count" resultType="int" parameterType="board">
 SELECT COUNT(*)

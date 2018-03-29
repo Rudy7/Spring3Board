@@ -54,7 +54,7 @@ public class BoardMapperImpl implements BoardMapper{
 
 	@Override
 	public List<BoardDTO> selectAll(PagiDTO pagi) {
-		logger.info("보더 매퍼임플 넘어온 페이지 pn은 {} ",	pagi.getPn());
+		logger.info("보더 매퍼임플 넘어온 페이지 pN은 {} ",	pagi.getPN());
 		List<BoardDTO> s = sqlSession.selectList(ns +"selectAll", pagi);
 		logger.info("보드 매퍼임플 selectAll=============================");
 		logger.info(" s는 {}", s);

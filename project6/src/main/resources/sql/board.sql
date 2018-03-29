@@ -16,14 +16,17 @@ create sequence bbsSeq start with 1;
 
 select * 
 from (select rownum NO,
+		     BBS_SEQ AS bbsSeq,
              title,
              content,
              writedate,
-             view_count,
+             VIEW_COUNT AS viewCount,
              good,
              userid
       from board)t 
-where t.NO between ((5-1)*5)+1 and 5*5;
+where t.NO between ((1-1)*5)+1 and 1*5
+order by bbsSeq asc;
+
 
 
 
