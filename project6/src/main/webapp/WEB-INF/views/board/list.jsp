@@ -94,7 +94,7 @@
 					<td class="text-center">${board.viewCount}</td>
 					<td class="text-center">${board.good}</td>
 					<td class="text-center">
-						<a href="#" 
+						<a href="" 
 						   id="btn-list-update">수정
 						</a>
 					</td>
