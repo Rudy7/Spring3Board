@@ -103,7 +103,7 @@
 						   id="btn-list-delete${i.index+1}">삭제
 						</a>
 					</td>
-				</tr>
+				</tr>  <!-- ss -->
 			</c:forEach>
 		</table>
 		
